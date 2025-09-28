@@ -74,23 +74,67 @@ public class CPTSMachine {
 
     public static boolean addStation(String name) {
         /* FILL CODE */
+        boolean found = false;
+        for (int i = 0; i < stationlist.size(); i++) {
+            if(name == stationlist.get(i).getName()) {
+                found = true;
+            }
+        }
+        if(!found) {
+            totalStationNumber++;
+            stationlist.add(new Station(name,totalStationNumber));
+            return true;
+        }
+        return false;
+
     }
 
     public static boolean isStationExisted(String name) {
         /* FILL CODE */
+        for (int i = 0; i < stationlist.size(); i++) {
+            if(name == stationlist.get(i).getName()) {
+                return true;
+            }
+        }
+        return false;
     }
 
     public static boolean buyTicket(int type, Station start, Station end) {
         /* FILL CODE (may not need code here) */
-        if(/* CONDITION */) {
+
+
+        Ticket ticket = new Ticket(type,start,end);
+
+
+        if(start!=null&&end!=null&&type>=0&&type<=2&&ticket.calculatePrice()!=-1) {
             /* FILL CODE */
-            System.out.println("Bought "+/* FILL CODE */+", for "+/* FILL CODE */+" Baht!");
+            String typename;
+
+            switch(type) {
+
+                case 0:
+                    typename = "Student";
+                    break;
+                case 1:
+                    //FILL CODE
+                    typename = "Adult";
+                    break;
+                case 2:
+                    //FILL CODE
+                    typename = "Elderly";
+                    if (ticket.getStationDistance(start,end)>6) typename = "Invalid";
+                    break;
+                default:
+                    typename = "Invalid";
+            }
+            System.out.println("Bought "+typename+", for "+ticket.calculatePrice()+" Baht!");
             return true;
         }else {
             System.out.println("This ticket cannot be bought.");
             return false;
         }
     }
+
 
     public static void showAllStation() {
         int n = 0;
