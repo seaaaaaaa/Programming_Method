@@ -1,0 +1,111 @@
+@startuml
+class util.Activation {
++ {static} double sigmoid(double)
++ {static} double tanh(double)
++ {static} double relu(double)
++ {static} double sigmoidDerivative(double)
++ {static} double tanhDerivative(double)
++ {static} double reluDerivative(double)
+}
+
+class container.Network {
+- {static} Layer[] layers
+- {static} Data[] datasets
++ {static} void forward(double[])
++ {static} void backward(double,Data)
++ {static} double sumGradient(int,int)
++ {static} void train(int,double)
++ {static} double calculateLoss(Neuron[],double[])
++ {static} double[] predict(double[])
++ void save(String)
++ {static} void load(String)
+- {static} String readNonEmptyLine(BufferedReader)
++ {static} Layer[] getLayers()
++ {static} void setLayers(Layer[])
++ {static} Data[] getDatasets()
++ {static} void setDatasets(Data[])
+}
+
+
+class container.Neuron {
+- {static} double minWeightValue
+- {static} double maxWeightValue
+- double[] weights
+- double gradient
+- double bias
+- double value
++ {static} void setRangeWeight(double,double)
++ {static} double getMinWeightValue()
++ {static} void setMinWeightValue(double)
++ {static} double getMaxWeightValue()
++ {static} void setMaxWeightValue(double)
++ double[] getWeights()
++ void setWeights(double[])
++ double getGradient()
++ void setGradient(double)
++ double getBias()
++ void setBias(double)
++ double getValue()
++ void setValue(double)
+}
+
+
+class main.Main {
++ {static} void main(String[])
++ {static} int findIndexOfMax(double[])
+}
+
+class container.Data {
+- double[] input
+- double[] output
++ double[] getInput()
++ void setInput(double[])
++ double[] getOutput()
++ void setOutput(double[])
+}
+
+
+enum function.Function {
++  SIGMOID
++  TANH
++  RELU
+}
+
+class util.DataReader {
++ {static} Data[] loader(String)
+- {static} Data processLine(String)
+}
+
+class util.GenRandom {
++ {static} Random random
++ {static} double randomDouble(double,double)
+}
+
+
+class util.ImageProcessor {
++ {static} double[] process(String)
+- {static} BufferedImage convertToGrayscale(BufferedImage,int,int)
+- {static} double[] normalizeImage(BufferedImage)
+}
+
+class container.Layer {
+- Neuron[] neurons
+- Function function
++ double applyActivation(double)
++ double applyActivationDerivative(double)
++ Neuron[] getNeurons()
++ void setNeurons(Neuron[])
++ Function getFunction()
++ void setFunction(Function)
+}
+
+
+class container.NeuronDemo {
+- Neuron n
++ void demonstrate()
++ Neuron getN()
++ void setN(Neuron)
+}
+
+
+@enduml
