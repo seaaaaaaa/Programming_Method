@@ -1,0 +1,105 @@
+@startuml
+class logic.DatabaseUtil {
++ {static} boolean isPlayerExists(ArrayList<Player>,String)
++ {static} boolean isRegionExists(ArrayList<Region>,String)
+}
+
+class main.Main {
+- {static} Database dataBase
+- {static} Scanner sc
+- {static} Player currentUser
++ {static} void main(String[])
+- {static} void logInPlayer()
+- {static} void showPlayerList()
+- {static} Region getRegionInput()
+- {static} Player registerPlayer()
+- {static} void editPlayerName(Player)
+- {static} void manageQuestStatus(Player)
+- {static} void takeOnQuest(Player)
+- {static} void showRegionList()
+- {static} void showQuestList(Region,Player)
+- {static} void postQuest(Player)
+- {static} void viewStatus()
+- {static} void printRegionStatus(Region)
+- {static} int getChoiceInput()
+- {static} String getStringInput()
+- {static} void populateDatabase()
+}
+
+
+enum logic.Status {
++  AVAILABLE
++  ACTIVE
++  FINISHED
+}
+
+class logic.Region {
+- String name
+- ArrayList<Player> playerList
+- ArrayList<Quest> questList
++ void setName(String)
++ int getPlayerCount()
++ double getRegionRank()
++ ArrayList<Quest> getAvailableQuests(Player)
++ void addPlayerToRegion(Player)
++ void addQuestToRegion(Quest)
++ String getName()
++ ArrayList<Player> getPlayerList()
++ void setPlayerList(ArrayList<Player>)
++ ArrayList<Quest> getQuestList()
++ void setQuestList(ArrayList<Quest>)
+}
+
+
+class logic.Database {
+- ArrayList<Player> playerList
+- ArrayList<Region> regionList
++ Player addPlayer(String,Region)
++ boolean addRegion(String)
++ Region getRegionByName(String)
++ void addQuest(Player,Region,String,String)
++ ArrayList<Player> getPlayerList()
++ void setPlayerList(ArrayList<Player>)
++ ArrayList<Region> getRegionList()
++ void setRegionList(ArrayList<Region>)
+}
+
+
+class logic.Player {
+- String name
+- int score
+- Quest currentQuest
++ String getName()
++ void setName(String)
++ int getScore()
++ void setScore(int)
++ void addScore(int)
++ Quest getCurrentQuest()
++ void setCurrentQuest(Quest)
++ int getRank()
+}
+
+
+class logic.Quest {
+- Player author
+- Region region
+- String name
+- String description
+- Status status
+- int rank
++ Player getAuthor()
++ void setAuthor(Player)
++ Region getRegion()
++ void setRegion(Region)
++ String getName()
++ void setName(String)
++ String getDescription()
++ void setDescription(String)
++ Status getStatus()
++ void setStatus(Status)
++ int getRank()
++ void setRank(int)
+}
+
+
+@enduml
