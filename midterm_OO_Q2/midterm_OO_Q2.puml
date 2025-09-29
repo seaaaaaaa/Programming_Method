@@ -1,0 +1,46 @@
+@startuml
+class test.grader.MisaShopTest {
+~ void setUp()
+~ void testAddItemToOrder()
+}
+
+class test.grader.OrderItemTest {
+~ {static} Item item1
+~ {static} Item item2
+~ {static} Item item3
+~ void testConstructor()
+~ void testConstructorNegativeAmount()
+~ void testGetItem()
+~ void testGetItemAmount()
+~ void testSetItemAmount()
+~ void testSetItemAmountNegative()
+~ void testCalculateTotalPrice()
+~ void testIncreaseItemAmount()
+~ void testIncreaseItemAmountNegative()
+}
+
+
+class test.grader.OrderTest {
+~ {static} Item item1
+~ {static} Item item2
+~ {static} Item item3
+~ void reset()
+~ void testConstructor()
+~ void testAddItemNormal()
+~ void testAddItemExisted()
+~ void testAddItemNegativeAmount()
+~ void testAddItemExistedNegativeAmount()
+~ void testCalculateOrderTotalPrice()
+}
+
+
+class test.grader.ItemTest {
+~ void testConstructor()
+~ void testConstructorIllegalPrice()
+~ void testGetPricePerPiece()
+~ void testSetPricePerPiece()
+~ void testSetPricePerPieceIllegal()
+~ void testGetName()
+}
+
+@enduml
