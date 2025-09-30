@@ -1,0 +1,153 @@
+@startuml
+class application.Main {
+- {static} GameManager gameManager
+- {static} MapManager mapManager
+- {static} Scanner scanner
+- {static} ArrayList<Integer> scoreList
++ {static} void main(String[])
+- {static} void initVariables()
+- {static} void waitInput()
+- {static} void startGame()
+- {static} char getGameInput()
+- {static} void printTopUI()
+- {static} void printBottomUI()
+- {static} void printGameEnded()
+- {static} void printStartMenu()
+- {static} void printMenuChoice()
+- {static} char getMenuInput()
+- {static} void printScoreList()
+}
+
+
+class render.GameMap {
+- {static} int[][] mapData
+- ArrayList<ArrayList<Stone>> mapSheet
+- ArrayList<WalkingStone> walkingStones
+- int startX
+- int startY
++ {static} void loadMap(String)
++ ArrayList<ArrayList<Stone>> getMapSheet()
++ Stone getStone(int,int)
++ int getStartX()
++ int getStartY()
++ int getStoneX(Stone)
++ int getStoneY(Stone)
++ void moveStone(Stone,int,int)
++ ArrayList<WalkingStone> getWalkingRocks()
+}
+
+
+class logic.stone.HardStone {
+# int durability
++ void dig(int)
++ int getDurability()
++ void setDurability(int)
+}
+
+
+class logic.game.GameManager {
+- {static} GameManager instance
+- int digPower
+- {static} int gameScore
+- int batteryLeft
+- boolean isGameEnded
++ {static} GameManager getInstance()
++ {static} GameManager resetInstance()
++ void doNextStep(char)
+- void doAction(int,int)
++ void digStone(Stone)
++ void endGame()
++ void useBattery(int)
++ void addDigPower(int)
++ void setGameScore(int)
++ int getGameScore()
++ int getBatteryLeft()
++ int getDigPower()
++ boolean getGameEnded()
+}
+
+
+class logic.stone.Gear {
+- int upgradeValue
++ void destroy()
++ int getUpgradeValue()
++ void setUpgradeValue(int)
+}
+
+
+class utils.GameUtilities {
++ {static} ArrayList<Stone> getAdjacentStones(int,int)
++ {static} void removeStone(Stone)
++ {static} void moveWalkingRock(WalkingStone)
+}
+
+class render.MapData {
++ {static} int[][] gameMap
++ {static} int[][] testMap1
++ {static} int[][] WalkingStoneMapTest
+}
+
+class logic.stone.WalkingStone {
++ void dig(int)
++ void walk()
+}
+
+class logic.stone.Crystal {
+- int value
++ void dig(int)
++ void destroy()
++ int getValue()
++ void setValue(int)
+}
+
+
+class logic.stone.Dynamite {
++ void destroy()
+}
+
+class render.MapManager {
+- {static} MapManager instance
+- GameMap gameMap
+- int playerX
+- int playerY
+- int mapSizeX
+- int mapSizeY
++ {static} MapManager getInstance()
++ {static} MapManager resetInstance()
++ void renderMap()
+- String getStoneIcon(Stone)
++ String getStoneName(Stone)
+- boolean checkOutbound(int,int)
++ boolean checkIsStone(int,int)
++ boolean checkEmptyTile(int,int)
++ Stone getStoneAt(int,int)
++ ArrayList<Stone> getAdjacentStonesAtPos(int,int)
++ void placeStoneAtPos(int,int,Stone)
++ void removeStoneAtPos(int,int)
++ void movePlayer(int,int)
++ int getPlayerX()
++ int getPlayerY()
++ GameMap getGameMap()
+}
+
+
+class logic.stone.Stone {
+# int posX
+# int posY
++ void dig(int)
++ void destroy()
++ int getPosX()
++ int getPosY()
++ void setPosX(int)
++ void setPosY(int)
+}
+
+
+
+
+logic.stone.Stone <|-- logic.stone.HardStone
+logic.stone.HardStone <|-- logic.stone.Gear
+logic.stone.Stone <|-- logic.stone.WalkingStone
+logic.stone.HardStone <|-- logic.stone.Crystal
+logic.stone.Stone <|-- logic.stone.Dynamite
+@enduml
