@@ -1,0 +1,70 @@
+@startuml
+class logic.card.NumberCard {
++ void play()
++ boolean ruleCheck()
+}
+
+class logic.card.DrawTwoCard {
++ void play()
++ boolean ruleCheck()
+}
+
+enum logic.game.CardSymbol {
++  ONE
++  TWO
++  THREE
++  FOUR
++  DRAW
+}
+
+class application.Main {
++ {static} void main(String[])
+}
+
+class logic.utility.GameLogicUtility {
++ {static} boolean drawRule()
+}
+
+class logic.game.GameLogic {
+- ArrayList<BaseCard> deck
+- ArrayList<BaseCard> hand
+- BaseCard topCard
+- {static} GameLogic instance
++ {static} GameLogic getInstance()
++ void draw(int)
++ void gameStart()
++ boolean checkDrawRule()
++ ArrayList<BaseCard> getDeck()
++ void setDeck(ArrayList<BaseCard>)
++ ArrayList<BaseCard> getHand()
++ void setHand(ArrayList<BaseCard>)
++ BaseCard getTopCard()
++ void setTopCard(BaseCard)
++ boolean isGameOver()
+}
+
+
+abstract class logic.card.BaseCard {
+- CardColor color
+- CardSymbol symbol
++ {abstract}void play()
++ {abstract}boolean ruleCheck()
++ CardColor getColor()
++ void setColor(CardColor)
++ CardSymbol getSymbol()
++ void setSymbol(CardSymbol)
+}
+
+
+enum logic.game.CardColor {
++  RED
++  BLUE
++  GREEN
++  YELLOW
+}
+
+
+
+logic.card.BaseCard <|-- logic.card.NumberCard
+logic.card.BaseCard <|-- logic.card.DrawTwoCard
+@enduml
