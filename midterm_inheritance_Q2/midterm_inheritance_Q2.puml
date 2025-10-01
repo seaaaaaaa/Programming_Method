@@ -1,0 +1,80 @@
+@startuml
+class forStudent.StandUser {
+- int maxHp
+- int currentHp
+- boolean isGuard
+- Stand stand
++ int takeDamage(int)
++ int doDamage(StandUser)
++ int getMaxHp()
++ int getCurrentHp()
++ void setCurrentHp(int)
++ boolean isGuard()
++ void setGuard(boolean)
++ void setStand(Stand)
++ void printShowStat()
++ StandUser selectStandUser()
+}
+
+
+class forStudent.Character {
+- String name
+- String quote
+- int strength
+- int defense
++ String getName()
++ String getQuote()
++ int getStrength()
++ int getDefense()
+}
+
+
+class logic.GameHandle {
++ {static} StandUser playerStandUser
++ {static} Stand playerStand
++ {static} StandUser enemyStandUser
++ {static} Stand enemyStand
++ {static} void GameController()
+- {static} int PlayerCommand()
++ {static} void resetCharacter()
+}
+
+
+class logic.main {
++ {static} List<StandUser> StandUserList
++ {static} List<Stand> standList
++ {static} int playerSelectedStandUser
++ {static} int playerSelectedStand
++ {static} Scanner kb
++ {static} void main(String[])
++ {static} boolean singlePlayerMode()
++ {static} void printMain()
++ {static} boolean showStandUserList()
++ {static} boolean showStandList()
++ {static} void addCharacter()
++ {static} boolean addStandUserHandle()
++ {static} boolean addStandHandle()
++ {static} void addinitialRoster()
+}
+
+
+class forStudent.Stand {
+- int maxChargeTurn
+- int currentChargeTurn
+- boolean isActive
++ int getMaxChargeTurn()
++ int getCurrentChargeTurn()
++ void increaseCharge(int)
++ void decreaseCharge(int)
++ boolean IsActive()
++ void setIsActive(boolean)
++ void printShowStat()
++ Stand selectStand()
+}
+
+
+
+
+forStudent.Character <|-- forStudent.StandUser
+forStudent.Character <|-- forStudent.Stand
+@enduml
