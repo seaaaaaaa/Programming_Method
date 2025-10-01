@@ -1,0 +1,125 @@
+@startuml
+class game.piece.Knight {
++ Object deepCopy()
+}
+
+class game.board.Board {
+- Piece[][] board
+- Status status
+- void setPiece(Piece,Position)
++ boolean placePiece(Piece,Position)
++ Piece getPiece(Position)
+- boolean movePiece(Position,Position)
++ boolean isSameColor(Position,Position)
++ boolean isEmpty(Position)
++ boolean isInBound(Position)
++ Board copyBoard()
++ boolean equals(Object)
++ Piece[][] getBoard()
++ Status getStatus()
+}
+
+
+class game.position.Position {
+- int row
+- int col
++ String toString()
++ boolean equals(Object)
++ int hashCode()
++ int getRow()
++ void setRow(int)
++ int getCol()
++ void setCol(int)
+}
+
+
+enum game.control.State {
++  WELCOME
++  INPUTPGN
++  INPUTFGN
++  INITPOS
++  INMATE
++  TOPLAY
++  CHECKLEGAL
++  WIN
++  DRAW
++  CLEANUP
++  EXIT
+}
+
+class game.piece.Piece {
+# boolean white
+# boolean moved
+# Position position
+# Board board
++ Set<Position> getLegalMove()
++ Object deepCopy()
++ String toString()
++ void moveHandle(Position)
++ boolean hadMoved()
++ boolean equals(Object)
++ boolean isWhite()
++ void setWhite(boolean)
++ boolean isMoved()
++ void setMoved(boolean)
++ Position getPosition()
++ void setPosition(Position)
++ Board getBoard()
++ void setBoard(Board)
+}
+
+
+class game.util.Constant {
++ {static} int ROW
++ {static} int COL
++ {static} String[][] ICONS
++ {static} String LOGO
++ {static} String STARTPOS
++ {static} String LOPEZPOS
+}
+
+class game.util.Movement {
+# Position current
+# Set<Position> moves
+# Board board
++ void diagonalMove()
++ void lShapeMove()
++ void setCurrent(Position)
++ Set<Position> getMoves()
++ Board getBoard()
++ void setBoard(Board)
++ void getMovePositions(Piece)
+}
+
+
+class game.position.TransPosition {
+- Position from
+- Position to
+- Status status
++ String toString()
++ Position getFrom()
++ Position getTo()
++ Status getStatus()
+}
+
+
+enum game.position.Status {
++  NORMAL
++  BISHOP
++  KNIGHT
++  ROOK
++  QUEEN
++  PROMOTE
++  CHECK
++  WIN
+}
+
+class game.piece.Bishop {
++ Object deepCopy()
+}
+
+
+
+game.piece.Piece <|-- game.piece.Knight
+game.piece.Piece <|-- game.piece.Bishop
+@enduml
