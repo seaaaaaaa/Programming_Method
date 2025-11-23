@@ -1,0 +1,42 @@
+plugins {
+    id 'java'
+    // 💡 ADD THIS LINE
+    id 'org.openjfx.javafxplugin' version '0.1.0'
+}
+
+group = 'progmeth_lab'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // Note: When using the JavaFX plugin, you usually don't need
+    // to specify the openjfx dependencies here, but it doesn't hurt.
+    // The plugin handles injecting the correct platform-specific dependencies.
+    implementation 'org.openjfx:javafx-controls:24.0.1'
+    implementation 'org.openjfx:javafx-fxml:24.0.1'
+    implementation 'org.openjfx:javafx-web:24.0.1'
+    implementation 'org.openjfx:javafx-graphics:24.0.1'
+    implementation 'org.openjfx:javafx-media:24.0.1'
+    implementation 'org.openjfx:javafx-swing:24.0.1'
+
+    // TestFX dependencies
+    testImplementation 'org.testfx:testfx-core:4.0.17'
+    testImplementation 'org.testfx:testfx-junit5:4.0.17'
+    testImplementation 'org.hamcrest:hamcrest:2.2'
+
+    testImplementation platform('org.junit:junit-bom:5.10.0')
+    testImplementation 'org.junit.jupiter:junit-jupiter'
+}
+
+// ✅ The 'javafx {}' block now works because the plugin is applied
+javafx {
+    version = '25.0.1'
+    modules = ['javafx.controls', 'javafx.fxml', 'javafx.graphics', 'javafx.media', 'javafx.web', 'javafx.swing']
+}
+
+test {
+    useJUnitPlatform()
+}
