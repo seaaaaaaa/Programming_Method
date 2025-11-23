@@ -1,0 +1,129 @@
+@startuml
+class logic.task.SimpleTask {
++ String fullTaskName()
+}
+
+class logic.task.TaskManager {
++ {static} ArrayList<Task> getTaskByType(ArrayList<Class>)
++ {static} void deleteDuplicateTasks()
++ {static} boolean instanceOf(Class,Class)
+}
+
+class logic.compute.GraphicUnit {
++ boolean canCompute(Task)
++ double compute(Task)
+}
+
+interface interfaces.Duplicatable {
++ void duplicateTask(int)
+}
+
+interface interfaces.Computable {
++ double compute(ProcessUnit)
+}
+
+abstract class logic.compute.ProcessUnit {
+- String modelName
+- int coreNumber
+- double clockSpeed
++ String getModelType()
++ String getModelName()
++ void setModelName(String)
++ double compute(Task)
++ double parallelCompute(Task)
++ {abstract}boolean canCompute(Task)
++ int getCoreNumber()
++ void setCoreNumber(int)
++ double getClockSpeed()
++ void setClockSpeed(double)
+}
+
+
+abstract class logic.task.Task {
+- String name
+- double workload
++ {abstract}String fullTaskName()
++ String toString()
++ String getName()
++ void setName(String)
++ double getWorkload()
++ void setWorkload(double)
+}
+
+
+class logic.task.SortTask {
++ double compute(ProcessUnit)
++ void mergeTask(int)
++ void modify(int)
++ double parallelCompute(ProcessUnit)
++ String fullTaskName()
+}
+
+class logic.task.TaskList {
+- {static} ArrayList<Task> tasks
++ {static} ArrayList<Task> getTasks()
++ {static} Task getTask(int)
++ {static} void setTasks(ArrayList<Task>)
++ {static} void addTasks(Task)
++ {static} void removeTask(int)
+}
+
+
+interface interfaces.Parallelizable {
++ double parallelCompute(ProcessUnit)
+}
+
+class logic.compute.ComputeUnit {
++ boolean canCompute(Task)
+}
+
+class logic.task.CalculationTask {
++ String fullTaskName()
++ double compute(ProcessUnit)
++ void changeWorkload(int)
++ void modify(int)
+}
+
+class application.Main {
++ {static} ArrayList<ProcessUnit> processUnits
++ {static} Scanner scanner
++ {static} void main(String[])
++ {static} void initTask()
++ {static} void initProcessUnit()
++ {static} void addProcessorUnit()
++ {static} void addTask()
++ {static} void showProcessorUnits()
++ {static} void showTasks(ArrayList<Task>)
++ {static} void estimateTask()
++ {static} void modifyTask()
+}
+
+
+interface interfaces.Modifiable {
++ void modify(int)
+}
+
+class logic.task.RenderTask {
++ String fullTaskName()
++ double compute(ProcessUnit)
++ double parallelCompute(ProcessUnit)
++ void duplicateTask(int)
+}
+
+
+
+logic.task.Task <|-- logic.task.SimpleTask
+logic.compute.ProcessUnit <|-- logic.compute.GraphicUnit
+interfaces.Computable <|.. logic.task.SortTask
+interfaces.Modifiable <|.. logic.task.SortTask
+interfaces.Parallelizable <|.. logic.task.SortTask
+logic.task.Task <|-- logic.task.SortTask
+logic.compute.ProcessUnit <|-- logic.compute.ComputeUnit
+interfaces.Computable <|.. logic.task.CalculationTask
+interfaces.Modifiable <|.. logic.task.CalculationTask
+logic.task.Task <|-- logic.task.CalculationTask
+interfaces.Computable <|.. logic.task.RenderTask
+interfaces.Parallelizable <|.. logic.task.RenderTask
+interfaces.Duplicatable <|.. logic.task.RenderTask
+logic.task.Task <|-- logic.task.RenderTask
+@enduml
